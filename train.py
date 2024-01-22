@@ -121,12 +121,14 @@ if __name__ == '__main__':
             log_data[5] += (output.max(1)[1] == y).float().sum().item()
         
         log_data = np.array(log_data)
-        log_data[0] /= 60000
-        log_data[1] /= 60000
-        log_data[2] /= 10000
-        log_data[3] /= 10000
-        log_data[4] /= 10000
-        log_data[5] /= 10000
+        num_train = 60000 if 'cifar' in dataset else 100000
+        num_test = 10000 if 'cifar' in dataset else 10000
+        log_data[0] /= num_train
+        log_data[1] /= num_train
+        log_data[2] /= num_test
+        log_data[3] /= num_test
+        log_data[4] /= num_test
+        log_data[5] /= num_test
         all_log_data.append(log_data)
         
         print(f'Epoch {epoch}:\t',log_data,f'\tTime {time()-start_time:.1f}s')
