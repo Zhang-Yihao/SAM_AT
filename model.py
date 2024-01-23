@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from deit import deit_tiny_patch16_224
 
 
 class PreActBlock(nn.Module):
@@ -274,3 +275,6 @@ def WRN28_10(num_classes=10):
     }
     return Network(config)
 
+def DeiT(num_classes=10):
+    model = deit_tiny_patch16_224(pretrained=False, num_classes=num_classes)
+    return model
